@@ -63,4 +63,52 @@ Current Phase:
 
 Shaikh Sufiyan 
 
+
+---
+
+# Progress Log
+
+## Day 1
+
+### Completed
+- Created project folders
+- Created GitHub repository
+- Downloaded required ISOs
+- Installed VirtualBox
+
+Status: ✅ Completed
+
+---
+
+## Day 2
+
+### Windows Server 2022 Installation
+
+Completed Tasks:
+- Created VirtualBox VM
+- Installed Windows Server 2022 Standard (Desktop Experience)
+- Allocated 3 GB RAM and 60 GB Disk
+- Configured Administrator account
+- Renamed server to DC01
+
+Status: ✅ Completed
+
+---
+
+## Day 3 Progress
+
+### Active Directory Domain Services
+
+Completed tasks:
+
+- Configured Static IP
+- Installed Active Directory Domain Services
+- Promoted server to Domain Controller
+- Created new forest: corp.local
+- Verified AD DS and DNS installation
+
+Status: ✅ Completed
+
+---
+
 SOC Analyst Aspirant
