@@ -110,5 +110,18 @@ Completed tasks:
 Status: ✅ Completed
 
 ---
+Day 4 – Windows 11 Client Domain Join
+
+Progress
+
+- Created a Windows 11 virtual machine in VirtualBox.
+- Installed Windows 11 Enterprise.
+- Configured the network settings.
+- Joined the client machine to the "corp.local" Active Directory domain.
+- Verified successful domain authentication using a domain user account.
+- Confirmed connectivity with the Domain Controller (DC01).
+
+Status: ✅ Completed
+----
 
 SOC Analyst Aspirant
