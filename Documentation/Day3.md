@@ -14,9 +14,9 @@ Steps Performed
 
 1. Configured Static IP
 
-- IP Address: 192.168.10.10
+- IP Address: 172.16.0.0
 - Subnet Mask: 255.255.255.0
-- DNS: 192.168.10.10
+- DNS: 127.0.01
 
 2. Installed AD DS Role
 
