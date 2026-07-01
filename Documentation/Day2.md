@@ -8,9 +8,9 @@ Environment
 
 - Hypervisor: VirtualBox
 - VM Name: DC01
-- RAM: 3072 MB
+- RAM: 3075 MB
 - CPU: 2 Cores
-- Disk: 60 GB (Dynamic VDI)
+- Disk: 50 GB (Dynamic VDI)
 
 Steps Performed
 
