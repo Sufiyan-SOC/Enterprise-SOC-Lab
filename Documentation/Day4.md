@@ -26,8 +26,7 @@ The Windows 11 client successfully joined the domain and authenticated against t
 
 ## Screenshots
 
-- Windows 11 Installation
-- System Properties
-- Domain Join Window
-- Domain Login Screen
-- Successful Desktop Login
+- Windows11_Desktop
+- IP_Config
+- Domain_Join
+- Domain_Login
