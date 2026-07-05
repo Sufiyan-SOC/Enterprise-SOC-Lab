@@ -112,10 +112,7 @@ Enterprise-SOC-Lab/
 
 ## 🚧 Project Status
 
-**In Progress**
-
-Current Phase:
-- Building Enterprise Active Directory Environment
+**Current Build:** Enterprise SOC Home Lab
 
 ---
 
