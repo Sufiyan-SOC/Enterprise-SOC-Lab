@@ -1,118 +1,108 @@
-# Day 1 – SOC Home Lab Planning & Virtual Infrastructure Setup
+# Day 1 – SOC Home Lab Planning & Virtualization Environment Setup
 
 ## Objective
 
-The objective of this phase was to design and build the foundational infrastructure for a SOC Analyst Home Lab.
+The objective of this phase was to design and prepare the foundation for a complete SOC (Security Operations Center) Home Lab.
 
-A virtual environment was planned to simulate an enterprise network where Windows and Linux systems could communicate securely. This infrastructure serves as the base for implementing Active Directory, SIEM, endpoint monitoring, log collection, threat detection, and incident investigation in the upcoming phases.
+The lab environment was planned to simulate an enterprise network where Windows systems, Linux servers, Active Directory, and SIEM solutions would work together to support security monitoring, log analysis, threat detection, and incident investigation.
 
 ---
 
-# Lab Architecture
+# Project Overview
+
+This SOC Home Lab project is designed to simulate a real enterprise Security Operations Center environment.
+
+The complete lab will include:
+
+* Windows Server (Active Directory)
+* Windows 11 Endpoint
+* Ubuntu Server
+* Splunk Enterprise SIEM
+* Splunk Universal Forwarder
+* Microsoft Sysmon
+* Attack Simulation
+* Detection Engineering
+* Security Monitoring
+* Incident Investigation
+
+---
+
+# Planned Lab Architecture
 
 ```text
-               SOC Home Lab
+                   SOC Home Lab
 
-               Host Machine
-                    │
-        ┌───────────┴───────────┐
-        │                       │
-        ▼                       ▼
- Windows Server            Ubuntu Server
- (Domain Controller)      (Splunk SIEM)
-
-        │
-        │
-        ▼
- Windows 11 Client
- (Domain Joined Endpoint)
+          Windows Server 2022
+        (AD DS, DNS, DHCP Server)
+                  │
+                  │
+        Internal Virtual Network
+                  │
+        ┌─────────┴─────────┐
+        │                   │
+        │                   │
+ Windows 11 Endpoint    Ubuntu Server
+                         (Splunk SIEM)
+        │                   │
+        │                   │
+ Universal Forwarder    Security Monitoring
+        │                   │
+        └─────────► Splunk Enterprise ◄─────────┘
 ```
 
 ---
 
-# Environment Details
+# Environment Preparation
 
-| Component               | Details              |
-| ----------------------- | -------------------- |
-| Virtualization Platform | Oracle VirtualBox    |
-| Host Operating System   | Windows              |
-| Server Operating System | Windows Server       |
-| Client Operating System | Windows 11           |
-| Linux Distribution      | Ubuntu Server        |
-| Project Type            | SOC Analyst Home Lab |
+Prepared the virtualization environment required for the SOC lab.
 
----
+Environment planning included:
 
-# Tasks Completed
-
-## 1. Planned the SOC Home Lab
-
-* Defined the overall lab architecture
-* Identified required virtual machines
-* Planned network communication between systems
-* Designed a scalable enterprise-style lab environment
+* Virtual machine architecture
+* Network segmentation
+* Operating system selection
+* Resource allocation
+* Storage planning
+* Host communication design
 
 ---
 
-## 2. Prepared Virtual Infrastructure
+# Software Planned
 
-Created virtual machines for:
-
-* Windows Server
-* Windows 11 Client
-* Ubuntu Server
-
-Allocated appropriate CPU, RAM, storage, and network adapters for each virtual machine.
-
----
-
-## 3. Designed Network Topology
-
-Planned communication between:
-
-* Windows Server
-* Windows 11 Client
-* Ubuntu Server
-* Host Machine
-
-Prepared the environment for future Active Directory and SIEM deployment.
-
----
-
-## 4. Defined Project Roadmap
-
-Planned upcoming implementation phases:
-
-* Active Directory Deployment
-* DNS & DHCP Configuration
-* Domain Joining
-* Linux Server Preparation
-* Splunk Enterprise Deployment
-* Windows Log Collection
-* Sysmon Deployment
-* Detection Engineering
-* Incident Investigation
-* MITRE ATT&CK Mapping
+| Component                  | Purpose                                   |
+| -------------------------- | ----------------------------------------- |
+| Oracle VirtualBox          | Virtualization Platform                   |
+| Windows Server 2022        | Active Directory Infrastructure           |
+| Windows 11                 | Enterprise Endpoint                       |
+| Ubuntu Server              | SIEM Server                               |
+| Splunk Enterprise          | Security Information and Event Management |
+| Splunk Universal Forwarder | Log Collection                            |
+| Microsoft Sysmon           | Advanced Endpoint Telemetry               |
 
 ---
 
 # Skills Learned
 
-* Enterprise lab planning
-* Virtual infrastructure design
-* SOC architecture fundamentals
-* Virtual machine deployment
+* SOC architecture planning
+* Enterprise lab design
+* Virtualization concepts
 * Network planning
-* Project documentation
+* Infrastructure design
+* Cybersecurity lab preparation
+
+---
+
+# Deliverables
+
+Successfully planned the complete SOC Home Lab environment with a structured roadmap for infrastructure deployment, centralized log collection, endpoint monitoring, and security operations.
 
 ---
 
 # Outcome
 
-Successfully planned and prepared the SOC Home Lab infrastructure.
+A scalable and enterprise-style SOC Home Lab architecture was successfully planned.
 
-The virtual environment is ready for implementing enterprise services such as Active Directory, DNS, DHCP, SIEM deployment, endpoint monitoring, and centralized log management.
+This foundation will support the deployment of Active Directory, Windows endpoints, Ubuntu Server, Splunk Enterprise, Sysmon, detection engineering, attack simulations, and incident response workflows throughout the remaining phases of the project.
 
-This foundation will support all future phases of the SOC Analyst Home Lab project.
-
+---
 
