@@ -1,24 +1,145 @@
-## Day 8 – Ubuntu Server Deployment
+# Day 08 - Ubuntu Server Installation & Initial Configuration
 
-### Overview
-Deployed an Ubuntu Server 24.04.4 LTS virtual machine to host enterprise security tools. Configured the server with OpenSSH, verified the hostname, network configuration, and prepared the system for Splunk Enterprise installation.
+## Objective
 
-### Key Achievements
-- Installed Ubuntu Server 24.04.4 LTS
-- Configured OpenSSH Server
-- Verified hostname configuration
-- Verified network interface and IP address
-- Updated the operating system
-- Tested connectivity with the Domain Controller
+The objective of Day 08 was to deploy the Ubuntu Server that will act as the SIEM server for the SOC Lab. The server was installed, basic configuration was completed, and the system was prepared for future Splunk Enterprise deployment.
 
-### Screenshots
+---
 
-| Screenshot | Description |
-|------------|-------------|
-| Ubuntu Login | Successfully logged into Ubuntu Server. |
-| Hostname Verification | Verified server hostname using `hostnamectl`. |
-| IP Configuration | Verified network interface using `ip a`. |
-| System Update | Updated Ubuntu packages using `apt`. |
-| Connectivity Test | Verified communication with the Domain Controller using `ping`. |
+# Lab Environment
 
-**Status:** ✅ Completed
+| Component        | Details                   |
+| ---------------- | ------------------------- |
+| Hypervisor       | Oracle VirtualBox 7.2.8   |
+| Operating System | Ubuntu Server 22.04.5 LTS |
+| Hostname         | ubuntu-siem               |
+| Username         | socadmin                  |
+| RAM              | 3 GB                      |
+| CPU              | 2 Cores                   |
+| Disk Size        | 60 GB                     |
+| Architecture     | x86_64                    |
+
+---
+
+# Objectives Completed
+
+* Created Ubuntu Server Virtual Machine
+* Installed Ubuntu Server 22.04.5 LTS
+* Configured hostname
+* Created administrator user
+* Updated system packages
+* Verified internet connectivity
+* Verified system information
+* Verified disk space
+* Prepared server for SIEM deployment
+
+---
+
+# Installation Details
+
+## Virtual Machine Configuration
+
+| Setting | Value           |
+| ------- | --------------- |
+| Name    | Ubuntu-SIEM     |
+| OS Type | Ubuntu (64-bit) |
+| RAM     | 3 GB            |
+| CPU     | 2 vCPU          |
+| Disk    | 60 GB (VDI)     |
+
+---
+
+# System Verification
+
+The following commands were used to verify the operating system and hardware configuration.
+
+## Ubuntu Version
+
+```bash
+lsb_release -a
+```
+
+---
+
+## System Architecture
+
+```bash
+uname -m
+```
+
+---
+
+## Hostname
+
+```bash
+hostnamectl
+```
+
+---
+
+## Disk Usage
+
+```bash
+df -h
+```
+
+---
+
+## Memory Information
+
+```bash
+free -h
+```
+
+---
+
+## Internet Connectivity
+
+```bash
+ping google.com
+```
+
+---
+
+# Package Update
+
+The operating system was updated before installing any software.
+
+```bash
+sudo apt update
+sudo apt upgrade -y
+```
+
+---
+
+# Skills Learned
+
+* Ubuntu Server Installation
+* Virtual Machine Deployment
+* Linux System Verification
+* Package Management
+* Disk Verification
+* Memory Verification
+* Basic Linux Administration
+* Server Preparation
+
+---
+
+# Challenges Faced
+
+* Selected appropriate virtual hardware resources.
+* Verified operating system installation.
+* Confirmed internet connectivity before software installation.
+* Prepared the server for future SIEM deployment.
+
+---
+
+# Key Takeaways
+
+* Ubuntu Server provides a stable platform for SIEM deployment.
+* System verification is essential before installing enterprise applications.
+* Keeping the operating system updated reduces compatibility and security issues.
+* Proper server preparation simplifies future deployment tasks.
+
+---
+
