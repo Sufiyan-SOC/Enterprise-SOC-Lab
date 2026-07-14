@@ -1,83 +1,53 @@
-# PowerShell Hunting Notes
+# Windows PowerShell Hunting
 
 ## Overview
 
-PowerShell is a legitimate Windows administration tool widely used by system administrators for automation and management. Because of its flexibility and deep access to the operating system, it is also frequently abused by attackers.
-
-Monitoring PowerShell execution is a common SOC activity for detecting suspicious behavior.
+PowerShell is a legitimate Windows administration framework that is widely used by system administrators. Because of its powerful scripting capabilities, it is also frequently abused by attackers for execution, persistence, lateral movement, and defense evasion.
 
 ---
 
-# Data Source
+## Data Source
 
-* Sysmon Operational Log
-* Event ID: 1 (Process Creation)
+Microsoft Sysmon
 
----
-
-# Key Fields
-
-| Field       | Purpose                            |
-| ----------- | ---------------------------------- |
-| Image       | Executed process path              |
-| ParentImage | Process that launched PowerShell   |
-| User        | User account executing the process |
-| Computer    | Endpoint where execution occurred  |
-| _time       | Event timestamp                    |
+Process Creation Events
 
 ---
 
-# Normal Parent Processes
+## Primary Process
 
-The following parent processes are commonly observed during legitimate PowerShell usage:
-
-* explorer.exe
-* cmd.exe
-* powershell_ise.exe
-
-These should still be validated within the environment.
+powershell.exe
 
 ---
 
-# Parent Processes Requiring Investigation
+## Important Fields
 
-PowerShell launched by the following processes may indicate suspicious activity:
-
-* winword.exe
-* excel.exe
-* outlook.exe
-* wscript.exe
-* cscript.exe
-* mshta.exe
-* rundll32.exe
-
-These processes should always be reviewed during investigations.
+| Field       | Description       |
+| ----------- | ----------------- |
+| Image       | Executed process  |
+| ParentImage | Parent process    |
+| User        | Executing account |
+| Computer    | Endpoint          |
+| _time       | Event timestamp   |
 
 ---
 
-# SOC Investigation Checklist
+## Why Monitor PowerShell?
 
-When investigating PowerShell activity:
+PowerShell is commonly used for:
 
-* Identify the user account.
-* Verify the parent process.
-* Review execution frequency.
-* Compare against normal administrative activity.
-* Correlate with additional Windows or Sysmon events.
-
----
-
-# MITRE ATT&CK
-
-Technique:
-
-T1059.001 – PowerShell
+* Administrative automation
+* Malware execution
+* File downloads
+* Remote administration
+* Post-exploitation activity
 
 ---
 
-# Key Takeaways
+## SOC Investigation Checklist
 
-* PowerShell execution alone is not malicious.
-* Parent process provides valuable execution context.
-* Multiple PowerShell executions in a short period may require investigation.
-* Context is more important than the executable name itself.
+* Verify the executing user.
+* Review the parent process.
+* Determine whether execution was expected.
+* Correlate with Registry and Scheduled Task activity.
+* Investigate additional endpoint events.
