@@ -1,8 +1,18 @@
-# Windows Logon Behavior Detection
+# Detection Name
 
-## Objective
+Windows Logon Behavior Analysis
 
-Detect abnormal Windows authentication behavior through logon event analysis.
+---
+
+## Detection Purpose
+
+Detect abnormal Windows authentication behavior through logon activity analysis.
+
+---
+
+## MITRE ATT&CK
+
+Technique: **T1078 – Valid Accounts**
 
 ---
 
@@ -17,32 +27,23 @@ Event IDs:
 
 ---
 
-## Detection Strategy
+## Detection Logic
 
-Monitor:
+Review authentication behavior by analyzing:
 
+* Logon frequency
+* Logon type
 * Failed authentication
 * Successful authentication
-* Logon type anomalies
-* Repeated authentication attempts
 
 ---
 
-## Investigation Steps
+## Splunk Detection Query
 
-1. Identify user account.
-2. Validate authentication result.
-3. Review logon type.
-4. Verify workstation.
-5. Correlate with surrounding endpoint events.
-
----
-
-## False Positives
-
-* User password mistakes
-* Service account authentication
-* Administrative maintenance
+```spl
+index=* (EventCode=4624 OR EventCode=4625)
+| stats count by Account_Name EventCode
+```
 
 ---
 
@@ -52,6 +53,25 @@ Medium
 
 ---
 
-## MITRE ATT&CK
+## False Positives
 
-T1078 – Valid Accounts
+* Password mistakes
+* Service accounts
+* Administrative logons
+
+---
+
+## Triage Steps
+
+1. Review authentication history.
+2. Identify repeated failures.
+3. Validate logon type.
+4. Review endpoint activity.
+
+---
+
+## Recommended Analyst Actions
+
+* Investigate abnormal authentication patterns.
+* Correlate with endpoint events.
+* Escalate suspicious authentication activity.
