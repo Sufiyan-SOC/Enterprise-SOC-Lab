@@ -1,8 +1,18 @@
-# Registry Run Key Persistence Detection
+# Detection Name
 
-## Objective
+Registry Run Key Persistence Detection
 
-Detect Registry Run Key persistence using Microsoft Sysmon Event ID 13.
+---
+
+## Detection Purpose
+
+Detect Registry Run and RunOnce modifications that may establish persistence.
+
+---
+
+## MITRE ATT&CK
+
+Technique: **T1547.001 – Registry Run Keys / Startup Folder**
 
 ---
 
@@ -10,31 +20,34 @@ Detect Registry Run Key persistence using Microsoft Sysmon Event ID 13.
 
 Microsoft Sysmon
 
-Event ID 13
+Event ID 13 – Registry Value Set
 
 ---
 
-## Detection Strategy
+## Detection Logic
 
 Monitor modifications to:
 
-* CurrentVersion\Run
-* CurrentVersion\RunOnce
+* HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+* HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+* RunOnce Registry locations
 
-Validate:
+Review:
 
-* Registry path
-* Executing process
-* User
+* Modified Registry path
 * Registry value
+* Responsible process
+* User account
 
 ---
 
-## False Positives
+## Splunk Detection Query
 
-* Software installation
-* Legitimate application startup entries
-* Enterprise software deployment
+```spl
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+(TargetObject="*\\CurrentVersion\\Run\\*" OR TargetObject="*\\CurrentVersion\\RunOnce\\*")
+| table _time User Image TargetObject Details
+```
 
 ---
 
@@ -44,6 +57,26 @@ High
 
 ---
 
-## MITRE ATT&CK
+## False Positives
 
-T1547.001 – Registry Run Keys / Startup Folder
+* Legitimate startup applications
+* Software installation
+* Administrative configuration
+
+---
+
+## Triage Steps
+
+1. Verify Registry location.
+2. Review Registry value.
+3. Identify responsible process.
+4. Correlate with PowerShell execution.
+5. Review timeline.
+
+---
+
+## Recommended Analyst Actions
+
+* Validate startup entry.
+* Investigate persistence mechanism.
+* Escalate unauthorized Registry modifications.
