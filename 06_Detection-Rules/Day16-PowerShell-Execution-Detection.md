@@ -1,8 +1,18 @@
-# PowerShell Execution Detection
+# Detection Name
 
-## Objective
+Windows PowerShell Execution Detection
 
-Detect Windows PowerShell execution using Microsoft Sysmon process creation events.
+---
+
+## Detection Purpose
+
+Detect execution of PowerShell to identify suspicious scripting activity, post-exploitation behavior, and administrative abuse.
+
+---
+
+## MITRE ATT&CK
+
+Technique: **T1059.001 – PowerShell**
 
 ---
 
@@ -10,41 +20,30 @@ Detect Windows PowerShell execution using Microsoft Sysmon process creation even
 
 Microsoft Sysmon
 
-Process Creation Events
+Event ID 1 – Process Creation
 
 ---
 
-## Detection Strategy
+## Detection Logic
 
-Monitor execution of:
+Monitor execution of **powershell.exe** and review:
 
-* powershell.exe
-
-Validate:
-
-* User account
+* Executing user
 * Parent process
+* Command line
 * Endpoint
-* Execution timeline
+
+Investigate PowerShell launched from uncommon parent processes or containing suspicious command-line arguments.
 
 ---
 
-## Investigation Steps
+## Splunk Detection Query
 
-1. Identify the executing user.
-2. Review the parent process.
-3. Validate whether execution is expected.
-4. Correlate with Registry modifications or Scheduled Tasks.
-5. Determine whether additional investigation is required.
-
----
-
-## False Positives
-
-* Administrative automation
-* System administration
-* Software deployment
-* Enterprise management tools
+```spl
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+Image="*powershell.exe"
+| table _time Computer User ParentImage CommandLine
+```
 
 ---
 
@@ -54,6 +53,26 @@ Medium
 
 ---
 
-## MITRE ATT&CK
+## False Positives
 
-T1059.001 – PowerShell
+* IT administration
+* Automation scripts
+* Enterprise management tools
+
+---
+
+## Triage Steps
+
+1. Identify the executing user.
+2. Review ParentImage.
+3. Analyze CommandLine.
+4. Verify execution purpose.
+5. Correlate with Registry or Scheduled Task activity.
+
+---
+
+## Recommended Analyst Actions
+
+* Validate administrative activity.
+* Investigate suspicious PowerShell execution.
+* Escalate if malicious behavior is confirmed.
