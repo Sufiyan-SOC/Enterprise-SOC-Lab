@@ -1,8 +1,18 @@
-# Windows Authentication Detection
+# Detection Name
 
-## Objective
+Windows Authentication Monitoring
 
-Detect successful and failed Windows authentication events.
+---
+
+## Detection Purpose
+
+Detect successful and failed Windows authentication events to identify unauthorized access attempts, password guessing, and abnormal user authentication behavior.
+
+---
+
+## MITRE ATT&CK
+
+Technique: **T1078 – Valid Accounts**
 
 ---
 
@@ -12,44 +22,59 @@ Windows Security Logs
 
 Event IDs:
 
-* 4624
-* 4625
+* 4624 (Successful Logon)
+* 4625 (Failed Logon)
 
 ---
 
 ## Detection Logic
 
-Monitor:
+Monitor successful and failed authentication events.
 
-* Successful authentication
-* Failed authentication
-* Multiple failures
+Investigate:
+
+* Excessive failed logons
+* Failed logons followed by successful authentication
+* Authentication from unexpected systems
 * Unusual logon types
 
 ---
 
-## Investigation
+## Splunk Detection Query
 
-Review:
+```spl
+index=* (EventCode=4624 OR EventCode=4625)
+| table _time host Account_Name EventCode Logon_Type
+```
 
-* Username
-* Host
-* Logon Type
-* Source IP
-* Time
+---
+
+## Severity
+
+Medium
 
 ---
 
 ## False Positives
 
-* User typing incorrect password
+* User entering incorrect password
 * Service account authentication
-* Administrative activity
+* Administrative maintenance
 
 ---
 
-## MITRE ATT&CK
+## Triage Steps
 
-T1078
+1. Identify affected user account.
+2. Review logon type.
+3. Verify source workstation.
+4. Review authentication timeline.
+5. Correlate with endpoint activity.
 
-Valid Accounts
+---
+
+## Recommended Analyst Actions
+
+* Validate user activity.
+* Review additional authentication attempts.
+* Escalate if suspicious authentication behavior is confirmed.
