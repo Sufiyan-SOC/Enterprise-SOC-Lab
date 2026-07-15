@@ -1,8 +1,18 @@
-# Registry Modification Detection
+# Detection Name
 
-## Objective
+Windows Registry Modification Detection
 
-Detect Windows Registry modifications using Microsoft Sysmon Event ID 13.
+---
+
+## Detection Purpose
+
+Detect Registry modifications that may indicate persistence, configuration changes, or malicious activity.
+
+---
+
+## MITRE ATT&CK
+
+Technique: **T1112 – Modify Registry**
 
 ---
 
@@ -12,38 +22,25 @@ Microsoft Sysmon
 
 Event ID 13
 
-Registry Value Set
-
 ---
 
-## Detection Strategy
+## Detection Logic
 
-Monitor Registry modifications by validating:
+Monitor Registry Value Set events and review:
 
-* Registry path
-* Executing process
-* User account
+* Modified Registry path
+* Responsible process
 * Registry value
-* Endpoint
+* User account
 
 ---
 
-## Investigation Steps
+## Splunk Detection Query
 
-1. Review modified Registry key.
-2. Identify responsible process.
-3. Validate Registry value.
-4. Determine whether the change is expected.
-5. Correlate with additional endpoint activity.
-
----
-
-## False Positives
-
-* Software installation
-* Windows updates
-* Administrative changes
-* Enterprise management tools
+```spl
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" "<EventID>13</EventID>"
+| table _time Image TargetObject Details User
+```
 
 ---
 
@@ -53,6 +50,25 @@ Medium
 
 ---
 
-## MITRE ATT&CK
+## False Positives
 
-T1112 – Modify Registry
+* Windows updates
+* Software installation
+* Administrative configuration changes
+
+---
+
+## Triage Steps
+
+1. Verify Registry path.
+2. Identify responsible process.
+3. Validate Registry value.
+4. Correlate with nearby endpoint events.
+
+---
+
+## Recommended Analyst Actions
+
+* Confirm change legitimacy.
+* Investigate unexpected Registry locations.
+* Escalate suspicious persistence indicators.
