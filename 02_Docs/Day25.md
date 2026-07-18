@@ -1,96 +1,62 @@
-# Hunt Name
+# Day 25 – Windows Account Management Monitoring using Splunk
 
-Windows User Account Hunting
+## Overview
 
----
+This lab focuses on monitoring Windows user account management events using Windows Security Logs and Splunk Enterprise. User account creation, deletion, password resets, and group membership changes are critical security events that may indicate administrative activity or attacker persistence.
 
-## Hunt ID
-
-TH-013
+The objective of this exercise was to create a temporary lab user account, generate Security Event ID 4720, investigate the event in Splunk, and understand how account management events support threat detection and incident response.
 
 ---
 
-## Objective
+## Objectives
 
-Identify unauthorized Windows user account creation.
-
----
-
-## Threat Hypothesis
-
-An attacker may create a new local administrator account to maintain access after compromising a system.
+* Monitor Windows Account Management events.
+* Detect Security Event ID 4720 in Splunk.
+* Investigate newly created user accounts.
+* Differentiate legitimate administrative activity from suspicious account creation.
+* Map account management activity to the MITRE ATT&CK framework.
 
 ---
 
-## Required Data Sources
+## Technologies Used
 
+* Splunk Enterprise
 * Windows Security Logs
-* Event ID 4720
+* Windows PowerShell
+* Windows User Management
 
 ---
 
-## MITRE ATT&CK
+## Skills Demonstrated
 
-* T1098 – Account Manipulation
-* T1078 – Valid Accounts
-
----
-
-## Hunt Query
-
-```spl
-index=* source="WinEventLog:Security" EventCode=4720
-| table _time ComputerName Account_Name SubjectUserName
-```
+* Windows Account Monitoring
+* Splunk Investigation
+* Threat Hunting
+* Insider Threat Detection
+* MITRE ATT&CK Mapping
 
 ---
 
-## Normal Output
+## Detection Workflow
 
-* Administrator creates a temporary lab account.
-* Account follows organizational naming standards.
-* Business-hours administrative activity.
-
----
-
-## Suspicious Output
-
-* Unknown administrator account.
-* Account created by SYSTEM.
-* Account created outside business hours.
-* Unexpected privileged user creation.
+1. Create a temporary lab user.
+2. Generate Security Event ID 4720.
+3. Collect the event in Splunk.
+4. Investigate the account creation.
+5. Validate whether the activity is legitimate.
+6. Remove the lab account.
 
 ---
 
-## IOC Examples
+## MITRE ATT&CK Mapping
 
-* Random account names.
-* Hidden administrator accounts.
-* Unauthorized local admin creation.
-* Multiple account creation events in a short period.
-
----
-
-## Analyst Outcome
-
-The analyst should determine whether the account creation is legitimate, correlate with authentication events, review privilege assignments, and escalate unauthorized account creation.
+| Technique | Description          |
+| --------- | -------------------- |
+| T1098     | Account Manipulation |
+| T1078     | Valid Accounts       |
 
 ---
 
-## Investigation Guidance
+## Outcome
 
-Correlate Event ID 4720 with:
-
-* Event ID 4624 (Successful Logon)
-* Event ID 4672 (Special Privileges Assigned)
-* Sysmon Event ID 1 (Process Creation)
-
-to identify who created the account and whether the activity is part of a broader attack.
-
----
-
-## References
-
-* MITRE ATT&CK T1098
-* MITRE ATT&CK T1078
-* Microsoft Security Event Documentation
+Successfully detected Windows user account creation using Security Event ID 4720. The exercise demonstrated how Security Event Logs can be used to monitor administrative activity and detect unauthorized account creation.
