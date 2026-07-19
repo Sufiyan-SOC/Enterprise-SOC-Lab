@@ -2,63 +2,148 @@
 
 ## Purpose
 
-This lab simulates a small enterprise network to gain practical experience in Security Operations Center (SOC) workflows. The environment focuses on Active Directory administration, centralized log collection, security monitoring, attack simulation, and incident investigation using Splunk Enterprise.
+The Enterprise SOC Lab is designed to simulate a real-world enterprise environment for Security Operations Center (SOC) operations. The lab provides hands-on experience in Windows infrastructure administration, centralized log management, attack simulation, security monitoring, threat hunting, detection engineering, and incident investigation using enterprise security tools.
+
+The objective is to understand how security events are generated, collected, analyzed, detected, and investigated across an Active Directory environment.
 
 ---
 
-## Core Components
+# Enterprise Environment
 
-### Windows Server 2022 (DC01)
+The lab consists of four interconnected systems that simulate a small enterprise network.
 
-Role:
-- Active Directory Domain Controller
+| System | Role |
+|---------|------|
+| Windows Server 2022 | Active Directory Domain Controller, DNS, DHCP |
+| Windows 11 Enterprise | Domain Joined Workstation |
+| Ubuntu Server | Splunk Enterprise SIEM |
+| Kali Linux | Attack Simulation Machine |
+
+---
+
+# Core Components
+
+## Windows Server 2022 (DC01)
+
+### Services
+
+- Active Directory Domain Services (AD DS)
 - DNS Server
 - DHCP Server
 
-Network:
-- NAT
+### Network
+
+- NAT Network
 - Internal Network
+
+### Responsibilities
+
+- Domain authentication
+- User and Group Management
+- DNS Resolution
+- IP Address Distribution
+- Group Policy Management
 
 ---
 
-### Windows 11 Enterprise (CLIENT1)
+## Windows 11 Enterprise (CLIENT1)
 
-Role:
-- Domain Joined Workstation
+### Role
+
+- Domain Joined Endpoint
+- Enterprise Workstation
 - Security Event Source
 
-Network:
+### Network
+
 - Internal Network
+
+### Responsibilities
+
+- Generates Windows Security Events
+- Generates Sysmon Events
+- Sends logs to Splunk through Universal Forwarder
 
 ---
 
-### Ubuntu Server
+## Ubuntu Server
 
-Role:
-- Splunk Enterprise
-- Central Log Collection
+### Role
 
-Network:
-- NAT
+Splunk Enterprise SIEM
+
+### Network
+
+- NAT Network
 - Internal Network
 - Host-Only Adapter
 
+### Responsibilities
+
+- Centralized Log Collection
+- Log Indexing
+- SPL Searching
+- Dashboard Visualization
+- Security Monitoring
+- Alert Development
+
 ---
 
-### Kali Linux
+## Kali Linux
 
-Role:
-- Attack Simulation Machine
+### Role
 
-Network:
-- NAT
+Attack Simulation Machine
+
+### Network
+
+- NAT Network
 - Internal Network
 
+### Responsibilities
+
+- Enumeration
+- Authentication Testing
+- SMB Testing
+- Network Scanning
+- Attack Simulation
+- Security Validation
+
 ---
 
-## Log Flow
+# Enterprise Network Flow
 
-Windows Client
+Internet
+
+↓
+
+VirtualBox NAT
+
+↓
+
+Windows Server (DC01)
+
+↓
+
+Enterprise Internal Network
+
+↓
+
+Windows Client • Ubuntu Server • Kali Linux
+
+---
+
+# Security Monitoring Workflow
+
+Windows Endpoint
+
+↓
+
+Windows Event Logs
+
++
+
+Sysmon Logs
 
 ↓
 
@@ -70,7 +155,19 @@ Splunk Enterprise
 
 ↓
 
-Detection
+Log Indexing
+
+↓
+
+SPL Queries
+
+↓
+
+Dashboards
+
+↓
+
+Alerts
 
 ↓
 
@@ -79,3 +176,73 @@ Threat Hunting
 ↓
 
 Incident Investigation
+
+↓
+
+MITRE ATT&CK Mapping
+
+↓
+
+Incident Report
+
+---
+
+# Security Use Cases
+
+The lab is designed to simulate enterprise SOC use cases, including:
+
+- User Authentication Monitoring
+- Failed Logon Detection
+- SMB Authentication Monitoring
+- Brute Force Detection
+- Network Enumeration Detection
+- Process Creation Monitoring
+- Network Connection Monitoring
+- Windows Security Event Analysis
+- Threat Hunting using SPL
+- Incident Documentation
+
+---
+
+# Data Sources
+
+The current lab collects logs from:
+
+- Windows Security Logs
+- Microsoft Sysmon
+- Windows System Logs
+- Windows Application Logs
+
+---
+
+# Architecture Highlights
+
+- Enterprise Active Directory Infrastructure
+- Centralized Log Collection using Splunk Enterprise
+- Domain Joined Windows Endpoint
+- Enterprise DNS & DHCP Services
+- Sysmon Enhanced Logging
+- Splunk Universal Forwarder
+- Enterprise Attack Simulation
+- Detection Engineering
+- Threat Hunting
+- Incident Investigation
+- MITRE ATT&CK Mapping
+- Security Documentation
+
+---
+
+# Skills Demonstrated
+
+- Active Directory Administration
+- Windows Server Administration
+- Windows Endpoint Monitoring
+- Enterprise Network Architecture
+- Log Management
+- SIEM Operations
+- SPL Query Development
+- Detection Engineering
+- Threat Hunting
+- Incident Investigation
+- MITRE ATT&CK Mapping
+- Security Documentation
