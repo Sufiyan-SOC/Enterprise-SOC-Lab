@@ -2,41 +2,81 @@
 
 ## Objective
 
-Develop and validate a Splunk detection use case for identifying suspicious PowerShell execution on Windows endpoints using Sysmon Process Creation events.
+Develop a Splunk detection use case to identify suspicious PowerShell execution on Windows endpoints using Sysmon Process Creation events.
 
-This exercise focuses on detection engineering, security monitoring, alert validation, and incident investigation within the Enterprise SOC Lab.
+The objective of this exercise was to simulate a real SOC workflow, beginning with detection engineering and ending with incident documentation.
 
 ---
 
 # Scenario
 
-PowerShell is one of the most frequently abused Windows utilities by adversaries for executing malicious payloads, downloading additional tools, establishing persistence, and performing post-exploitation activities.
+PowerShell is one of the most commonly abused Windows utilities during post-exploitation.
 
-To improve endpoint visibility, Sysmon Process Creation events were monitored in Splunk Enterprise and detection logic was developed to identify suspicious PowerShell command-line arguments.
+Attackers frequently use PowerShell to:
+
+- Execute malicious scripts
+- Launch encoded commands
+- Download payloads
+- Evade detection
+- Execute fileless attacks
+
+To improve endpoint visibility, Sysmon Process Creation logs were collected into Splunk Enterprise and used to build a detection capable of identifying suspicious PowerShell activity.
 
 ---
 
-# Environment
+# Lab Environment
 
 | Component | Role |
 |-----------|------|
-| CLIENT1 | Windows 11 Enterprise Endpoint |
+| Windows Server 2022 | Active Directory, DNS, DHCP |
+| Windows 11 Enterprise | Monitored Endpoint |
 | Ubuntu Server | Splunk Enterprise |
-| Sysmon | Process Creation Logging |
-| Kali Linux | Attack Workstation (Not used during validation) |
+| Sysmon | Endpoint Telemetry |
+| Kali Linux | Attack Workstation |
 
 ---
 
-# Data Source
+# Workflow
 
-- Sysmon Operational Log
-- Event ID 1 (Process Creation)
+Detection Rule
+
+↓
+
+SPL Query
+
+↓
+
+Alert
+
+↓
+
+Dashboard
+
+↓
+
+Attack Simulation
+
+↓
+
+Alert Trigger
+
+↓
+
+Dashboard Analysis
+
+↓
+
+Investigation
+
+↓
+
+Incident Report
 
 ---
 
 # Detection Strategy
 
-The detection monitors PowerShell executions containing commonly abused command-line arguments such as:
+The detection focused on PowerShell executions containing command-line arguments frequently associated with attacker activity, including:
 
 - EncodedCommand
 - -enc
@@ -45,93 +85,34 @@ The detection monitors PowerShell executions containing commonly abused command-
 - Invoke-WebRequest
 - DownloadString
 
-These arguments are frequently associated with attacker tradecraft and are commonly observed during malware execution, fileless attacks, and post-exploitation.
+---
+
+# Detection Outcome
+
+The detection successfully identified suspicious PowerShell executions generated during the attack simulation.
+
+Splunk provided complete visibility into:
+
+- Executing endpoint
+- User account
+- Parent process
+- Command line
+- Execution timeline
+
+The collected telemetry enabled a complete analyst investigation and incident documentation.
 
 ---
 
-# Detection Workflow
+# Skills Demonstrated
 
-PowerShell Execution
-
-↓
-
-Sysmon Event ID 1
-
-↓
-
-Splunk Log Collection
-
-↓
-
-Detection Rule
-
-↓
-
-Alert Generation
-
-↓
-
-SOC Investigation
-
-↓
-
-Incident Documentation
-
----
-
-# Splunk Components
-
-## Detection Rule
-
-DR-002 — Suspicious PowerShell Execution
-
----
-
-## Alert
-
-Suspicious PowerShell Execution
-
-Severity: High
-
----
-
-## Dashboard
-
-Endpoint PowerShell Monitoring
-
-Dashboard Panels:
-
-- PowerShell Execution Trend
-- Top Users
-- Top Endpoints
-- Suspicious Commands
-- Recent Executions
-- Parent Process Analysis
-
----
-
-# Validation
-
-Controlled PowerShell commands containing suspicious command-line arguments were executed to validate the detection rule.
-
-The generated Sysmon events were successfully indexed into Splunk Enterprise and matched the detection logic.
-
-The alert triggered successfully, confirming the rule was operating as expected.
-
----
-
-# Investigation
-
-The investigation verified:
-
-- Endpoint
-- Executing User
-- Parent Process
-- Full Command Line
-- Execution Time
-- Detection Trigger
-
-The activity was confirmed as an authorized security validation performed within the Enterprise SOC Lab.
+- Windows Endpoint Monitoring
+- Sysmon Log Analysis
+- Splunk SPL Development
+- Alert Engineering
+- Dashboard Development
+- Security Investigation
+- Detection Engineering
+- MITRE ATT&CK Mapping
 
 ---
 
@@ -140,24 +121,3 @@ The activity was confirmed as an authorized security validation performed within
 | Tactic | Technique | ID |
 |---------|-----------|----|
 | Execution | PowerShell | T1059.001 |
-
----
-
-# Skills Demonstrated
-
-- Detection Engineering
-- Windows Endpoint Monitoring
-- Sysmon Log Analysis
-- Splunk SPL Development
-- Alert Engineering
-- Dashboard Development
-- Security Investigation
-- MITRE ATT&CK Mapping
-
----
-
-# Outcome
-
-Successfully designed, implemented, validated, and investigated a Splunk detection use case for suspicious PowerShell execution using Sysmon telemetry.
-
-This use case demonstrates an end-to-end SOC workflow from endpoint telemetry collection to alert generation and incident investigation.
