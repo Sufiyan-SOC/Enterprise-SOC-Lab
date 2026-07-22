@@ -72,7 +72,7 @@ These binaries are frequently abused during the Discovery phase of an intrusion.
 
 ---
 
-# SIEM Workflow
+# Detection Workflow
 
 Attack Simulation
 
