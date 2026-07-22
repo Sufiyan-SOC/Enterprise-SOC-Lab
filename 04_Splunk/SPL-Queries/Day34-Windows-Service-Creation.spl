@@ -1,0 +1,98 @@
+###############################################################
+# Enterprise SOC Lab
+# Day 34
+# Use Case : Windows Service Creation
+# MITRE : T1543.003
+###############################################################
+
+###############################################################
+# Raw Event Validation
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+Image="*\\sc.exe"
+| table _time Computer User ParentImage Image CommandLine
+| sort - _time
+
+###############################################################
+# Detection
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+Image="*\\sc.exe"
+| search CommandLine="*create*"
+| table _time Computer User ParentImage Image CommandLine
+| sort - _time
+
+###############################################################
+# Alert
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+Image="*\\sc.exe"
+| search CommandLine="*create*"
+| stats count by Computer User CommandLine
+
+###############################################################
+# Alert Triage
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+Image="*\\sc.exe"
+| search CommandLine="*create*"
+| table _time User Computer ParentImage CommandLine
+| sort - _time
+
+###############################################################
+# Investigation
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+Image="*\\sc.exe"
+| search CommandLine="*create*"
+| timechart span=5m count by User
+
+###############################################################
+# Dashboard Panel 1
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+Image="*\\sc.exe"
+| search CommandLine="*create*"
+| stats count by CommandLine
+
+###############################################################
+# Dashboard Panel 2
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+Image="*\\sc.exe"
+| search CommandLine="*create*"
+| stats count by User
+
+###############################################################
+# Dashboard Panel 3
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+Image="*\\sc.exe"
+| search CommandLine="*create*"
+| timechart span=5m count
+
+###############################################################
+# Dashboard Panel 4
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+Image="*\\sc.exe"
+| search CommandLine="*create*"
+| stats count by Computer
