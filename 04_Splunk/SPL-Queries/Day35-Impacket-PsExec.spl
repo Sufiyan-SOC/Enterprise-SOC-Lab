@@ -1,0 +1,93 @@
+###############################################################
+# Enterprise SOC Lab
+# Day 35
+# Use Case : Remote Command Execution via Impacket PsExec
+# MITRE : T1021.002
+###############################################################
+
+###############################################################
+# Raw Event Validation
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+User="NT AUTHORITY\\SYSTEM"
+| table _time Computer User ParentImage Image CommandLine
+| sort - _time
+
+###############################################################
+# Detection
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+User="NT AUTHORITY\\SYSTEM"
+Image="*\\cmd.exe"
+| table _time Computer ParentImage Image CommandLine
+| sort - _time
+
+###############################################################
+# Alert
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+User="NT AUTHORITY\\SYSTEM"
+Image="*\\cmd.exe"
+| stats count by Computer ParentImage Image
+
+###############################################################
+# Alert Triage
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+User="NT AUTHORITY\\SYSTEM"
+Image="*\\cmd.exe"
+| table _time Computer ParentImage Image CommandLine
+
+###############################################################
+# Investigation
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+User="NT AUTHORITY\\SYSTEM"
+| stats count values(ParentImage) as ParentProcess values(Image) as Process values(CommandLine) as CommandExecuted by Computer User
+
+###############################################################
+# Dashboard Panel 1
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+User="NT AUTHORITY\\SYSTEM"
+| table _time Computer ParentImage Image CommandLine
+
+###############################################################
+# Dashboard Panel 2
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+User="NT AUTHORITY\\SYSTEM"
+| stats count by Computer
+
+###############################################################
+# Dashboard Panel 3
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+User="NT AUTHORITY\\SYSTEM"
+| bucket _time span=5m
+| stats count by _time
+
+###############################################################
+# Dashboard Panel 4
+###############################################################
+
+index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+EventCode=1
+User="NT AUTHORITY\\SYSTEM"
+| stats count values(CommandLine) as CommandExecuted by Computer
