@@ -150,24 +150,6 @@ The generated telemetry enabled identification of:
 
 ---
 
-# Security Impact
-
-Although these commands are legitimate Windows administration tools, they are also commonly used by attackers immediately after gaining access to a system.
-
-Monitoring discovery activity allows SOC analysts to identify suspicious reconnaissance before privilege escalation or lateral movement occurs.
-
----
-
-# Recommendations
-
-- Monitor execution of Windows discovery commands.
-- Enable Sysmon Process Creation logging across endpoints.
-- Correlate discovery activity with subsequent authentication events.
-- Investigate repeated discovery activity originating from non-administrative users.
-- Map detections to the MITRE ATT&CK framework to improve detection coverage.
-
----
-
 # Skills Demonstrated
 
 - Windows Security Monitoring
