@@ -1,0 +1,72 @@
+###############################################################
+# Enterprise SOC Lab
+# Day 33
+# Use Case : Successful Remote Desktop Logon
+# MITRE : T1021.001
+###############################################################
+
+###############################################################
+# Raw Event Validation
+###############################################################
+
+index=* source="WinEventLog:Security" EventCode=4624
+| table _time ComputerName Account_Name LogonType Source_Network_Address WorkstationName
+| sort - _time
+
+###############################################################
+# Detection
+###############################################################
+
+index=* source="WinEventLog:Security" EventCode=4624 LogonType=10
+| table _time ComputerName Account_Name Source_Network_Address WorkstationName
+| sort - _time
+
+###############################################################
+# Alert
+###############################################################
+
+index=* source="WinEventLog:Security" EventCode=4624 LogonType=10
+| stats count by ComputerName Account_Name Source_Network_Address
+
+###############################################################
+# Alert Triage
+###############################################################
+
+index=* source="WinEventLog:Security" EventCode=4624 LogonType=10
+| table _time Account_Name Source_Network_Address ComputerName WorkstationName
+| sort - _time
+
+###############################################################
+# Investigation
+###############################################################
+
+index=* source="WinEventLog:Security" EventCode=4624 LogonType=10
+| timechart span=5m count by Account_Name
+
+###############################################################
+# Dashboard Panel 1
+###############################################################
+
+index=* source="WinEventLog:Security" EventCode=4624 LogonType=10
+| stats count by Account_Name
+
+###############################################################
+# Dashboard Panel 2
+###############################################################
+
+index=* source="WinEventLog:Security" EventCode=4624 LogonType=10
+| stats count by Source_Network_Address
+
+###############################################################
+# Dashboard Panel 3
+###############################################################
+
+index=* source="WinEventLog:Security" EventCode=4624 LogonType=10
+| timechart span=5m count
+
+###############################################################
+# Dashboard Panel 4
+###############################################################
+
+index=* source="WinEventLog:Security" EventCode=4624 LogonType=10
+| stats count by ComputerName
