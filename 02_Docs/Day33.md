@@ -1,32 +1,40 @@
-# Detection Use Cases
+# Remote Desktop Logon Detection
 
 ## Overview
 
-This directory contains the technical documentation for every security detection use case implemented in the Enterprise SOC Lab.
+This document describes the complete Security Operations Center (SOC) workflow for detecting and investigating Remote Desktop Protocol (RDP) logon activity within the Enterprise SOC Lab.
 
-Each document represents a complete Security Operations Center (SOC) workflow, beginning with a controlled attack simulation and ending with investigation and incident documentation.
+Remote Desktop is a legitimate administrative service commonly used by system administrators. However, it is also one of the most frequently abused remote access techniques by attackers after obtaining valid credentials.
 
-The objective is to demonstrate practical experience with detection engineering, security monitoring, security analysis, and incident response using Splunk Enterprise.
+The objective of this use case is to demonstrate how Splunk Enterprise can detect RDP logon events, support analyst investigation, and identify potential unauthorized remote access.
 
 ---
 
-# SOC Detection Workflow
+# Detection Objective
 
-Every documented detection follows the same workflow:
+Detect successful Remote Desktop logon events and provide visibility into user authentication, source system activity, and endpoint access.
 
-Attack Scenario
+---
 
-↓
+# Attack Scenario
+
+A Remote Desktop connection was established to CLIENT1 using valid domain credentials from another system within the lab environment.
+
+The activity generated Windows Security authentication events that were collected and analyzed in Splunk Enterprise.
+
+---
+
+# Detection Workflow
 
 Attack Simulation
 
 ↓
 
-Windows Event Generation
+Windows Security Logs
 
 ↓
 
-Log Collection in Splunk
+Splunk Log Collection
 
 ↓
 
@@ -58,42 +66,53 @@ Incident Report
 
 ---
 
-# Documentation Standard
+# Log Source
 
-Each detection use case contains:
+- Windows Security Event Log
+- Event ID 4624 (Successful Logon)
+- Logon Type 10 (Remote Interactive)
 
-- Attack Scenario
-- Attack Simulation
-- Log Source
-- Detection Objective
-- Detection Logic
-- SPL Queries
-- Alert Configuration
-- Investigation Process
+---
+
+# Detection Summary
+
+The detection identified:
+
+- Successful RDP authentication
+- Target endpoint
+- Authenticated user
+- Logon type
+- Source IP Address
+- Authentication timeline
+
+---
+
+# Investigation Summary
+
+The investigation confirmed a successful Remote Desktop session to CLIENT1 using valid domain credentials.
+
+Splunk Enterprise correlated authentication logs to identify the destination endpoint, authenticated user account, logon type, and source IP address.
+
+The activity was validated as an authorized lab simulation and classified as a True Positive.
+
+---
+
+# MITRE ATT&CK
+
+| Tactic | Technique | ID |
+|---------|-----------|----|
+| Lateral Movement | Remote Services: Remote Desktop Protocol | T1021.001 |
+
+---
+
+# Skills Demonstrated
+
+- Windows Authentication Analysis
+- Remote Desktop Monitoring
+- Splunk Detection Engineering
+- SIEM Alert Development
+- SOC Alert Triage
+- Incident Investigation
 - MITRE ATT&CK Mapping
-- Dashboard Design
-- Incident Report
-- Analyst Recommendations
-
----
-
-# Current Detection Use Cases
-
-| Detection Use Case | MITRE ATT&CK |
-|--------------------|--------------|
-| SMB Brute Force | T1110 |
-| Local Account Discovery | T1087.001 |
-| Network Share Discovery | T1135 |
-| Remote Desktop Logon | T1021.001 |
-
-> Additional enterprise detection use cases will be added as the lab expands.
-
----
-
-# Purpose
-
-The documentation in this directory demonstrates the complete lifecycle of enterprise security detections, from attack simulation to investigation and reporting.
-
-Rather than focusing only on attack execution, each use case highlights how a SOC analyst detects, validates, investigates, and documents suspicious activity using Splunk Enterprise.
-
-This approach reflects real-world Security Operations Center workflows and showcases practical blue-team skills relevant to SOC Analyst (L1) responsibilities.
+- Dashboard Development
+- Incident Reporting
