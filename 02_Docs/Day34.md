@@ -1,32 +1,44 @@
-# Detection Use Cases
+# Windows Service Creation Detection
 
 ## Overview
 
-This directory contains the technical documentation for all security detection use cases implemented throughout the Enterprise SOC Lab.
+This document describes the complete Security Operations Center (SOC) workflow for detecting Windows service creation events that may indicate persistence or unauthorized software installation.
 
-Each document represents a complete Security Operations Center (SOC) workflow based on a controlled attack simulation performed within the lab environment. The documentation demonstrates how security events are detected, analyzed, investigated, and documented using Splunk Enterprise.
+Windows services are commonly used by administrators for legitimate system management. However, attackers frequently abuse Windows services to establish persistence, execute malicious payloads, or maintain long-term access to compromised systems.
 
-The objective is to showcase practical blue team skills aligned with real-world SOC Analyst responsibilities.
+The objective of this use case is to demonstrate how Splunk Enterprise can detect Windows service creation events, support SOC investigations, and improve visibility into persistence techniques.
+
+---
+
+# Detection Objective
+
+Identify newly created Windows services that could indicate persistence, unauthorized administrative activity, or post-exploitation behavior.
+
+---
+
+# Attack Scenario
+
+A new Windows service was created on CLIENT1 using the Windows Service Control (sc.exe) utility.
+
+The activity generated Windows Security and Sysmon events, allowing Splunk Enterprise to detect, investigate, and document the service creation process.
 
 ---
 
 # Detection Workflow
 
-Every documented use case follows a standardized SOC workflow:
-
-Attack Scenario
-
-↓
-
 Attack Simulation
 
 ↓
 
-Windows Event Generation
+Windows Security Logs
 
 ↓
 
-Log Collection in Splunk
+Microsoft Sysmon Logs
+
+↓
+
+Splunk Log Collection
 
 ↓
 
@@ -58,31 +70,52 @@ Incident Report
 
 ---
 
-# Documentation Standard
+# Log Sources
 
-Each detection use case includes:
-
-- Attack Scenario
-- Attack Simulation
-- Detection Objective
-- Windows Log Source
-- Detection Logic
-- SPL Detection Queries
-- SIEM Alert Configuration
-- Alert Triage Process
-- Investigation Methodology
-- MITRE ATT&CK Mapping
-- Dashboard Design
-- Incident Report
-- Analyst Notes
-- Security Recommendations
+- Microsoft Sysmon
+- Windows Security Logs
 
 ---
 
-# Purpose
+# Detection Summary
 
-The purpose of this documentation is to demonstrate the complete lifecycle of enterprise security monitoring, from attack simulation through detection engineering, investigation, and incident reporting.
+The detection successfully identified:
 
-Rather than focusing solely on attack execution, each use case illustrates how a SOC Analyst validates security events, develops detections, performs investigations, maps adversary behavior to the MITRE ATT&CK Framework, and documents findings using enterprise SOC methodologies.
+- Windows service creation activity
+- Service executable path
+- Service name
+- User responsible for service creation
+- Endpoint where the service was installed
 
-This documentation reflects practical Security Operations Center workflows commonly performed by Tier 1 Security Analysts in enterprise environments.
+---
+
+# Investigation Summary
+
+The investigation confirmed that a new Windows service was created during a controlled lab simulation.
+
+Splunk correlated Windows Security and Sysmon telemetry to identify the endpoint, user account, service name, executable path, and execution timeline.
+
+The activity was validated as an authorized lab exercise and classified as a True Positive.
+
+---
+
+# MITRE ATT&CK
+
+| Tactic | Technique | ID |
+|---------|-----------|----|
+| Persistence | Create or Modify System Process: Windows Service | T1543.003 |
+
+---
+
+# Skills Demonstrated
+
+- Attack Simulation
+- Windows Event Log Analysis
+- Microsoft Sysmon Monitoring
+- Splunk Detection Engineering
+- SIEM Alert Development
+- SOC Alert Triage
+- Incident Investigation
+- MITRE ATT&CK Mapping
+- Security Dashboard Development
+- Incident Reporting
