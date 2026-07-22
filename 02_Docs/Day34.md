@@ -79,20 +79,6 @@ Each detection use case includes:
 
 ---
 
-# Current Detection Use Cases
-
-| Detection Use Case | MITRE ATT&CK |
-|--------------------|--------------|
-| SMB Brute Force Detection | T1110 |
-| Local Account Discovery | T1087.001 |
-| Network Share Discovery | T1135 |
-| Remote Desktop Logon Detection | T1021.001 |
-| Windows Service Creation Detection | T1543.003 |
-
-> Additional enterprise detection use cases will be added as the Enterprise SOC Lab continues to expand.
-
----
-
 # Purpose
 
 The purpose of this documentation is to demonstrate the complete lifecycle of enterprise security monitoring, from attack simulation through detection engineering, investigation, and incident reporting.
