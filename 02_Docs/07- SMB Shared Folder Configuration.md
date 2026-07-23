@@ -16,12 +16,6 @@ Configured an SMB shared folder on the Windows Server Domain Controller and secu
 
 ---
 
-## Implementation Summary
-
-A shared folder named **CompanyData** was created on the Domain Controller and published over SMB. Share Permissions and NTFS Permissions were configured to control access to the shared resource. Connectivity and file access were tested from the Windows 11 Enterprise client after joining it to the Active Directory domain.
-
----
-
 ## Skills Demonstrated
 
 - Windows File Sharing (SMB)
