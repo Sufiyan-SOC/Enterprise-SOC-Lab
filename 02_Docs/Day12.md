@@ -6,35 +6,6 @@ The objective of this phase was to enhance endpoint visibility by deploying Sysm
 
 Sysmon provides detailed security events that help SOC analysts detect suspicious process execution, network activity, file creation, registry modifications, and other endpoint behaviors that are not fully available in standard Windows Event Logs.
 
----
-
-# Lab Architecture
-
-```
-                SOC Home Lab Environment
-
-Windows 11 Endpoint
-        │
-        │
-   Microsoft Sysmon
-        │
-        │
-Windows Event Logs
-(Sysmon Operational Log)
-        │
-        │
-Splunk Universal Forwarder
-        │
-        │ TCP 9997
-        │
-Ubuntu Server
-(Splunk Enterprise SIEM)
-        │
-        │
-Security Monitoring
-Detection
-Investigation
-```
 
 ---
 
