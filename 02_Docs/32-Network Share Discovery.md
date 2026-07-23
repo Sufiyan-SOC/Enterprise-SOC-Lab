@@ -1,4 +1,4 @@
-# Day32 - Network Share Discovery
+# Day 32 - Network Share Discovery
 
 ## Overview
 
