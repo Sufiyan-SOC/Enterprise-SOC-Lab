@@ -1,73 +1,65 @@
 # 🛡️ Enterprise SOC Lab
 
-## 📌 Overview
+## Enterprise Security Operations Center (SOC) Home Lab
 
-This project documents the design and implementation of an Enterprise Security Operations Center (SOC) home lab built inside VirtualBox.
+An enterprise-style Security Operations Center (SOC) Home Lab built to gain hands-on experience with Windows infrastructure, Active Directory administration, centralized log management, security monitoring, detection engineering, and incident investigation using Splunk Enterprise.
 
-The lab simulates a small enterprise Windows domain where security events are collected, centralized, and investigated using Splunk Enterprise. The environment is designed to provide hands-on experience with Active Directory administration, Windows event logging, Sysmon telemetry, security monitoring, attack simulation, and incident investigation.
+This project simulates a small enterprise environment where Windows endpoints generate security telemetry that is collected, analyzed, and investigated using real SOC workflows.
 
-The primary objective of this project is to gain practical Blue Team experience by building, managing, and monitoring an enterprise-style environment instead of relying only on theoretical knowledge.
-
----
-
-# 🎯 Project Objectives
-
-- Build an enterprise Windows Active Directory environment
-- Deploy a centralized Domain Controller
-- Configure DNS and DHCP services
-- Join Windows clients to the domain
-- Deploy Splunk Enterprise as the central SIEM
-- Configure Splunk Universal Forwarder
-- Deploy Sysmon for enhanced endpoint telemetry
-- Collect Windows Security and Sysmon logs
-- Simulate attacks from Kali Linux
-- Investigate security events using SPL queries
-- Build detection use cases
-- Document incidents and findings
+The primary goal of this lab is to demonstrate practical Blue Team skills required for an entry-level SOC Analyst role.
 
 ---
 
-# 🏗️ Enterprise Lab Architecture
+# Key Highlights
+
+- Enterprise Active Directory Environment
+- Windows Server 2022 Domain Controller
+- DNS & DHCP Infrastructure
+- Windows 11 Domain Client
+- Splunk Enterprise SIEM Deployment
+- Splunk Universal Forwarder Configuration
+- Microsoft Sysmon Deployment
+- Windows Security Log Collection
+- Attack Simulation from Kali Linux
+- Detection Engineering using SPL
+- Security Monitoring
+- Alert Development
+- Dashboard Development
+- Incident Investigation
+- MITRE ATT&CK Mapping
+- Incident Documentation
+
+---
+
+# Lab Architecture
 
 ```text
                            Internet
                               │
-                       NAT Network
+                           NAT Network
                               │
-                  ┌──────────────────────┐
-                  │ Windows Server 2022  │
-                  │ DC01                 │
-                  │ Domain Controller    │
-                  │ DNS • DHCP           │
-                  │ NAT + Internal       │
-                  └──────────┬───────────┘
-                             │
-                  Internal Network (intnet)
-      ┌──────────────────────┼──────────────────────┐
-      │                      │                      │
-      │                      │                      │
-┌──────────────┐     ┌────────────────┐     ┌──────────────┐
-│ Windows 11   │     │ Ubuntu Server  │     │ Kali Linux   │
-│ Enterprise   │     │ Splunk         │     │ Attack VM    │
-│ CLIENT1      │     │ SIEM           │     │ NAT + Internal│
-│ Internal     │     │ NAT + Internal │     └──────────────┘
-└──────────────┘     └────────────────┘
+                  ┌────────────────────────┐
+                  │ Windows Server 2022    │
+                  │ DC01                   │
+                  │ Active Directory       │
+                  │ DNS • DHCP             │
+                  │ NAT + Internal         │
+                  └────────────┬───────────┘
+                               │
+                     Internal Network
+        ┌──────────────────────┼──────────────────────┐
+        │                      │                      │
+        │                      │                      │
+ ┌──────────────┐      ┌────────────────┐     ┌──────────────┐
+ │ Windows 11   │      │ Ubuntu Server  │     │ Kali Linux   │
+ │ CLIENT1      │      │ Splunk SIEM    │     │ Attack VM    │
+ │ Domain Joined│      │ Log Collection │     │ Attack Sim   │
+ └──────────────┘      └────────────────┘     └──────────────┘
 ```
 
 ---
 
-# 🖥️ Lab Environment
-
-| System | Role |
-|---------|------|
-| Windows Server 2022 | Active Directory Domain Controller |
-| Windows 11 Enterprise | Domain Joined Client |
-| Ubuntu Server | Splunk Enterprise SIEM |
-| Kali Linux | Attack Simulation Machine |
-
----
-
-# ⚙️ Technologies Used
+# Technologies
 
 - Windows Server 2022
 - Windows 11 Enterprise
@@ -79,54 +71,104 @@ The primary objective of this project is to gain practical Blue Team experience 
 - DHCP
 - Splunk Enterprise
 - Splunk Universal Forwarder
-- Sysmon
-- PowerShell
+- Microsoft Sysmon
 - Windows Event Logs
+- PowerShell
 - MITRE ATT&CK Framework
 
 ---
 
-# 🔍 Current Lab Capabilities
-
-### Enterprise Infrastructure
+# Enterprise Infrastructure
 
 - Active Directory Domain
-- Organizational Units (OU)
+- Organizational Units
 - Domain Users
 - Domain Groups
-- DNS
-- DHCP
+- DNS Server
+- DHCP Server
 - Domain Joined Windows Client
-
-### Security Monitoring
-
-- Splunk Enterprise
-- Universal Forwarder
-- Windows Security Event Collection
-- Sysmon Event Collection
-- Windows Authentication Monitoring
-
-### Attack Simulation
-
-- Kali Linux Attack Machine
-- SMB Authentication Testing
-- Network Reconnaissance
-- Windows Security Event Generation
-
-### Investigation
-
-- Windows Security Log Analysis
-- Sysmon Investigation
-- SPL Queries
-- Authentication Event Investigation
-- Source IP Identification
+- Enterprise Windows Environment
 
 ---
 
-# 📂 Repository Structure
+# Security Monitoring
+
+- Windows Security Event Collection
+- Sysmon Event Collection
+- Authentication Monitoring
+- Process Creation Monitoring
+- Windows Service Monitoring
+- Remote Command Execution Monitoring
+- RDP Logon Monitoring
+- Network Share Discovery Monitoring
+
+---
+
+# Detection Engineering
+
+The project includes enterprise detection use cases developed using Splunk Search Processing Language (SPL).
+
+Implemented detections include:
+
+- Windows Authentication Monitoring
+- Brute Force Detection
+- Network Share Discovery Detection
+- RDP Logon Detection
+- Windows Service Creation Detection
+- Remote Command Execution Detection (Impacket PsExec)
+
+Each detection includes:
+
+- SPL Query
+- Alert Logic
+- Dashboard
+- Investigation
+- MITRE ATT&CK Mapping
+- Incident Report
+
+---
+
+# SOC Investigation Workflow
+
+Every detection follows a structured SOC investigation process.
 
 ```text
-Enterprise-SOC-Lab
+Attack Simulation
+        │
+        ▼
+Windows Security Logs / Sysmon
+        │
+        ▼
+Splunk Log Collection
+        │
+        ▼
+Detection Rule (SPL)
+        │
+        ▼
+SIEM Alert
+        │
+        ▼
+Alert Triage
+        │
+        ▼
+Investigation
+        │
+        ▼
+MITRE ATT&CK Mapping
+        │
+        ▼
+Dashboard Visualization
+        │
+        ▼
+Incident Report
+```
+
+---
+
+# Repository Structure
+
+```text
+Enterprise-SOC-Lab/
 
 ├── 01_Architecture
 ├── 02_Docs
@@ -147,58 +189,40 @@ Enterprise-SOC-Lab
 
 ---
 
-# 🧩 Security Components
+# Skills Demonstrated
 
-Current log sources include:
-
-- Windows Security Logs
-- Sysmon Operational Logs
-- Windows Authentication Events
-- Process Creation Events
-- Network Connection Events
-
----
-
-# 🧠 Skills Demonstrated
-
-- Enterprise Active Directory Administration
+- Active Directory Administration
 - Windows Server Administration
-- Windows Client Administration
-- Splunk Enterprise Deployment
-- Splunk Universal Forwarder Configuration
-- Sysmon Deployment
-- Windows Event Log Analysis
-- Security Monitoring
-- Threat Investigation
-- Detection Engineering Fundamentals
+- Windows Endpoint Administration
+- Splunk Enterprise Administration
+- Windows Log Analysis
+- Microsoft Sysmon
+- Detection Engineering
+- SIEM Alert Development
+- Dashboard Development
+- Security Event Investigation
+- Incident Response Documentation
 - MITRE ATT&CK Mapping
 - Blue Team Operations
 
 ---
 
-# 🚧 Current Project Status
+# Project Status
 
-**Status:** In Progress
+**Status:** Version 1.0 Completed
 
-Completed:
+This project demonstrates an end-to-end enterprise SOC workflow, including infrastructure deployment, centralized logging, detection engineering, security monitoring, investigation, dashboard creation, MITRE ATT&CK mapping, and incident reporting.
 
-- Enterprise Lab Deployment
-- Active Directory Infrastructure
-- Windows Domain Environment
-- Splunk Enterprise Deployment
-- Universal Forwarder Deployment
-- Sysmon Configuration
-- Windows Log Collection
-- Initial Security Monitoring
-- Initial Attack Simulation
-- Authentication Event Investigation
-
-The project is continuously being expanded with new attack scenarios, detection logic, dashboards, threat hunting queries, and incident reports.
+Future enhancements may include additional enterprise detection use cases and expanded SOC automation.
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 **Shaikh Sufiyan**
 
-Blue Team | SOC Analyst (Aspiring) | Cybersecurity Enthusiast
+Aspiring SOC Analyst | Blue Team | Splunk | Active Directory | Detection Engineering
+
+---
+
+> This project was built for learning, portfolio development, and demonstrating practical SOC Analyst skills in an enterprise-style lab environment.
