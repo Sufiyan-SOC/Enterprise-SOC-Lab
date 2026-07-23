@@ -1,6 +1,6 @@
-# Day 13 - Windows Authentication Monitoring & Basic Brute Force Detection
+# Day 13 - Windows Authentication Monitoring 
 
-## Overview
+# Overview
 
 On Day 13, the focus was on monitoring Windows authentication events using Splunk Enterprise. Windows Security logs were analyzed to understand user authentication behavior, identify failed login attempts, and build a basic detection for brute-force activity.
 
