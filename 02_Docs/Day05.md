@@ -1,25 +1,45 @@
-## Day 5 – Active Directory User & Group Management
+# Day 5 – Active Directory User & Group Management
 
-### Overview
+## Overview
 
-Configured an enterprise-style Active Directory structure by organizing users into Organizational Units (OUs), creating security groups, and assigning users based on their departmental roles. Verified user and group configuration using Active Directory and PowerShell.
+Implemented enterprise-style Active Directory user and group management by organizing users into Organizational Units (OUs), creating security groups, and assigning user accounts based on departmental roles. The configuration was validated using Active Directory Users and Computers (ADUC) and PowerShell.
 
-### Key Achievements
+---
+
+## Objectives
+
+- Organize Active Directory objects using Organizational Units (OUs)
+- Create security groups for role-based access management
+- Assign users to appropriate security groups
+- Validate user and group membership using PowerShell
+
+---
+
+## Activities Performed
 
 - Verified Active Directory user accounts
 - Created Organizational Units (OUs)
 - Created Security Groups
-- Assigned users to security groups
-- Verified group memberships using PowerShell
+- Added users to their respective security groups
+- Verified group membership using PowerShell commands
 
-### Screenshots
+---
 
-| Screenshot | Description |
-|------------|-------------|
-| Users | Verified Active Directory user accounts |
-| OUs | Enterprise Organizational Unit structure |
-| Groups | Security groups created |
-| Membership | Users assigned to groups |
-| PowerShell | Verified users and groups |
+## Validation
 
-**Status:** ✅ Completed
+Configuration was successfully verified through:
+
+- Active Directory Users and Computers (ADUC)
+- PowerShell
+
+---
+
+## Skills Demonstrated
+
+- Active Directory Administration
+- Organizational Unit (OU) Management
+- Security Group Management
+- User Administration
+- Role-Based Access Control (RBAC)
+- PowerShell Verification
+
