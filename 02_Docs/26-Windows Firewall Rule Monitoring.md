@@ -1,4 +1,4 @@
-# Day 26 – Windows Firewall Rule Monitoring using Splunk
+# Day 26 – Windows Firewall Rule Monitoring
 
 ## Overview
 
