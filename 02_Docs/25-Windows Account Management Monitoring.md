@@ -1,4 +1,4 @@
-# Day 25 – Windows Account Management Monitoring using Splunk
+# Day 25 – Windows Account Management Monitoring 
 
 ## Overview
 
